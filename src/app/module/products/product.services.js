@@ -18,8 +18,24 @@ async function getProductsByCategory(category) {
     throw new Error("Failed to fetch products.");
   }
 }
+const getAllProductsByCategory = async () => {
+  try {
+    const productsByCategory = await Product.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          products: { $push: "$$ROOT" },
+        },
+      },
+    ]);
+    return productsByCategory;
+  } catch (error) {
+    throw new Error("Unable to get products by category");
+  }
+};
 
 module.exports = {
   createProduct,
   getProductsByCategory,
+  getAllProductsByCategory,
 };

@@ -18,7 +18,16 @@ async function getProductsByCategory(req, res) {
     res.status(500).json({ error: "Failed to fetch products." });
   }
 }
+const getAllProductsByCategory = async (req, res) => {
+  try {
+    const productsByCategory = await productService.getAllProductsByCategory();
+    res.json(productsByCategory);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
 module.exports = {
   createProduct,
-  getProductsByCategory
+  getProductsByCategory,
+  getAllProductsByCategory,
 };

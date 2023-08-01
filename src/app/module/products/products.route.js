@@ -4,5 +4,6 @@ const productController = require("./products.controller.js");
 
 // Create a new product
 router.post("/add", productController.createProduct);
+router.get("/", productController.getAllProductsByCategory);
 router.get("/:category", productController.getProductsByCategory);
 module.exports = router;
